@@ -115,6 +115,9 @@ def dashboard(request):
         total_revenue=Sum('total_price')
     ).order_by('-total_revenue')[:5])
     
+    for item in category_sales:
+        item['total_revenue'] = float(item['total_revenue']) if item['total_revenue'] is not None else 0.0
+    
     context = {
         'user_profile': user_profile,
         'stats': stats,
